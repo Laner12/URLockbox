@@ -1,0 +1,31 @@
+<h1>Links</h1>
+<div class="jumbotron text-center">
+  <p>
+    To create a new link, fill out this form:
+  </p>
+  <%= form_for(:link, url: links_path) do |f| %>
+  <%= f.label :title %> <br>
+  <%= f.text_field :title %> <br>
+
+  <%= f.label :url %> <br>
+  <%= f.url_field :url %> <br>
+
+  <%= f.hidden_field :user_id, { value: current_user.id } %>
+  <%= f.submit "Create Link"%>
+  <% end %>
+</div>
+
+<% if @links.count > 0 %>
+  <% @links.each do |link| %>
+      <div class="jumbotron text-center">
+        <h3>Title: <%= link.title %></h3> <br>
+        <h3><a href=<%= link.url %>>Link</a></h3> <br>
+        <h3>Has been read: <%= link.read %></h3> <br>
+        <% if link.read == "false" %>
+          <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
+          <% else %>
+          <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
+        <% end %>
+      </div>
+  <% end %>
+<% end %>

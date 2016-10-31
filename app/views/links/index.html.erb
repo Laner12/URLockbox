@@ -25,7 +25,8 @@
           <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
           <% else %>
           <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
-        <% end %>
+        <% end %> <br>
+        <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
       </div>
   <% end %>
 <% end %>

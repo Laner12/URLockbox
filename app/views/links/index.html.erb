@@ -23,6 +23,8 @@
         <h3>Has been read: <%= link.read %></h3> <br>
         <% if link.read == "false" %>
           <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
+          <% else %>
+          <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
         <% end %>
       </div>
   <% end %>

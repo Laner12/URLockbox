@@ -31,11 +31,9 @@
             <td><%= link.read %></td>
             <td>
               <% if link.read == "false" %>
-                <!-- <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %> -->
                   <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>
                 <% else %>
-                <!-- <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %> -->
-                  <button name='mark-unread' class='mark-unread btn btn-primary'>Mark as unread</button>
+                  <button name='mark-unread' class='mark-unread btn btn-danger'>Mark as unread</button>
               <% end %>
             </td>
           </tr>

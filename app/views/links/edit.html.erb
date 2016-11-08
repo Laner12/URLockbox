@@ -1,6 +1,6 @@
 <h1>Edit Link</h1>
 <div class="jumbotron text-center">
-  <%= form_for(:link, url: links_path(@link)) do |f| %>
+  <%= form_for(:link, url: link_path(@link), method: :put) do |f| %>
   <%= f.label :title %> <br>
   <%= f.text_field :title %> <br>
 

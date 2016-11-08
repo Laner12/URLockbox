@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "User can create a link with bad url" do
-  scenario "user can visit create a link with bad url" do
+RSpec.feature "User cannot create a link with bad url" do
+  scenario "user cannot create a link with bad url" do
 
     visit root_path
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User can mark a link as read" do
-  scenario "user can alter read status" do
+  xscenario "user can alter read status" do
 
     visit root_path
 

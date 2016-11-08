@@ -9,7 +9,7 @@ class LinksController < ApplicationController
     if @link.save
       redirect_to links_path
     else
-      flash.now[:danger] = @link.errors.full_messages.join(", ")
+      flash.now[:danger] = "Invalid inputs, Please try again!"
       redirect_to links_path
     end
   end
@@ -20,6 +20,7 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
+    @link.update_attributes(link_params)
     if @link.read == "true"
       @link.update_attributes(read: "false")
     else

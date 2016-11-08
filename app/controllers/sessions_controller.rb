@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to links_path
     else
-      flash.now[:danger] = @user.errors.full_messages.join(", ")
+      flash.now[:danger] = "Invalid Credintials, Please try again!"
       render :new
     end
   end

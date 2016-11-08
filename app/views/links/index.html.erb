@@ -15,18 +15,16 @@
   <% end %>
 </div>
 
-<% if @links.count > 0 %>
-  <% @links.each do |link| %>
-      <div class="jumbotron text-center">
-        <h3>Title: <%= link.title %></h3> <br>
-        <h3><a href=<%= link.url %>>Link</a></h3> <br>
-        <h3>Has been read: <%= link.read %></h3> <br>
-        <% if link.read == "false" %>
-          <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
-          <% else %>
-          <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
-        <% end %> <br>
-        <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
-      </div>
-  <% end %>
+<% @links.each do |link| %>
+    <div class="jumbotron text-center">
+      <h3>Title: <%= link.title %></h3> <br>
+      <h3><a href=<%= link.url %>>Link</a></h3> <br>
+      <h3>Has been read: <%= link.read %></h3> <br>
+      <% if link.read == "false" %>
+        <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
+        <% else %>
+        <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
+      <% end %> <br>
+      <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
+    </div>
 <% end %>

@@ -1,14 +1,10 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
+    <a href="/" class="navbar-brand"><strong>URLockbox</strong></a>
     <% if current_user %>
-    <a class="navbar-brand" href="/"><strong>URLockbox</strong></a>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/logout" data-method="delete">Logout</a>
       </ul>
-    <% else %>
-      <div class="navbar-brand">
-        <strong>URLockbox</strong>
-      </div>
     <% end %>
   </div>
 </nav>

@@ -3,7 +3,7 @@
   <p>
     To create a new link, fill out this form:
   </p>
-  <%= form_for(:link, url: api_v1_links_path) do |f| %>
+  <%= form_for(:link, url: links_path(@link), method: :post) do |f| %>
   <%= f.label :title %> <br>
   <%= f.text_field :title %> <br>
 
@@ -15,28 +15,32 @@
   <% end %>
 </div>
 
-<% @links.each do |link| %>
-    <div class="jumbotron">
-      <table class="text-center" style="width:100%">
-        <tr>
-          <th class="text-center">Title</th>
-          <th class="text-center">Link</th>
-          <th class="text-center">Has been read?</th>
-          <th class="text-center">Options</th>
-        </tr>
-        <tr>
-          <td><%= link.title %></td>
-          <td><a href=<%= link.url %>>Click Here</a></td>
-          <td><%= link.read %></td>
-          <td>
-            <% if link.read == "false" %>
-              <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
-              <% else %>
-              <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
-            <% end %>
-          </td>
-        </tr>
-      </table><br>
-      <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
-    </div>
-<% end %>
+<div class="linked-list">
+  <% @links.each do |link| %>
+      <div class="link jumbotron" data-id=<%= link.id %> data-user=<%= current_user.id %> data-read="read" data-unread="unread" data-edit="edit">
+        <table class="text-center" style="width:100%">
+          <tr>
+            <th class="text-center">Title</th>
+            <th class="text-center">Link</th>
+            <th class="text-center">Has been read?</th>
+            <th class="text-center">Options</th>
+          </tr>
+          <tr>
+            <td><%= link.title %></td>
+            <td><a href=<%= link.url %>>Click Here</a></td>
+            <td><%= link.read %></td>
+            <td>
+              <% if link.read == "false" %>
+                <!-- <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %> -->
+                  <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>
+                <% else %>
+                <!-- <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %> -->
+                  <button name='mark-unread' class='mark-unread btn btn-primary'>Mark as unread</button>
+              <% end %>
+            </td>
+          </tr>
+        </table><br>
+        <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
+      </div>
+  <% end %>
+</div>

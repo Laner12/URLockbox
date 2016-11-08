@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <td><%= link.title %></td>
-            <td><a href=<%= link.url %>>Click Here</a></td>
+            <td><a href=<%= link.url %>>Click_Here</a></td>
             <td><%= link.read %></td>
             <td>
               <% if link.read == "false" %>
@@ -38,7 +38,7 @@
             </td>
           </tr>
         </table><br>
-        <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
+        <%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %>
       </div>
   <% end %>
 </div>

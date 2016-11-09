@@ -17,14 +17,16 @@
 
 <div class="jumbotron text-center">
   <div>
-    <!-- View links by status: <button name='read' class='read btn btn-default'>Read</button> | <button name='unread' class='unread btn btn-default'>Unread</button> -->
+    <p>
+      View links by:
+    </p>
     <table class="text-center" style="width:100%">
       <tr>
-        <th>View links by:</th>
-        <td><button name='read' class='read-status-filter btn btn-default'>Status is Read</button></td>
-        <td><button name='unread' class='unread-status-filter btn btn-default'>Status is Unread</button></td>
-        <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetically</button></td>
+        <td><button name='read' class='read-status-filter btn btn-default'>Status: Read</button></td>
+        <td><button name='unread' class='unread-status-filter btn btn-default'>Status: Unread</button></td>
         <td><input type="text" id="search-field" placeholder="Search"></td>
+        <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetical</button></td>
+        <td><button name='all-links' class='all-links btn btn-default'>Show all</button></td>
       </tr>
     </table>
   </div>
@@ -32,7 +34,7 @@
 
 <div class="linked-list">
   <% @links.each do |link| %>
-      <div class="link jumbotron" data-id=<%= link.id %> data-user=<%= current_user.id %> data-read="read" data-unread="unread" data-edit="edit">
+      <div class="link link-status-<%= link.read %> jumbotron" data-id=<%= link.id %> data-user=<%= current_user.id %> data-read="read" data-unread="unread" data-edit="edit">
         <table class="text-center" style="width:100%">
           <tr>
             <th class="text-center">Title</th>
@@ -43,7 +45,7 @@
           <tr>
             <td class="link-title"><%= link.title %></td>
             <td class="link-url"><a href=<%= link.url %>><%= link.url %></a></td>
-            <td class="link-status-<%= link.read %>"><%= link.read %></td>
+            <td><%= link.read %></td>
             <td>
               <% if link.read == "false" %>
                   <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>

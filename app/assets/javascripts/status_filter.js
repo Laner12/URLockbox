@@ -1,21 +1,26 @@
 $(document).ready(function(){
-  searchTerm();
+  searchFilterRead();
+  searchFilterUnread();
+  searchFilterReset();
 })
 
-  function searchTerm(){
+  function searchFilterRead(){
     $(".read-status-filter").on("click", function(){
-      var $links = $(".link-status-true")
-      $.each($links, function(index, link){
-        debugger
-      })
-      // .find(".link")
-      // $.each($links, function(link){
-      //   var status = $(link).find('.link-status-true').selector
-      //   if (status) {
-      //     $(link).show();
-      //   } else {
-      //     $(link).hind();
-      //   }
-      // })
+      $(".link-status-false").hide();
+      $(".link-status-true").show();
+    })
+  }
+
+  function searchFilterUnread(){
+    $(".unread-status-filter").on("click", function(){
+      $(".link-status-true").hide();
+      $(".link-status-false").show();
+    })
+  }
+
+  function searchFilterReset(){
+    $(".all-links").on("click", function(){
+      $(".link-status-true").show();
+      $(".link-status-false").show();
     })
   }

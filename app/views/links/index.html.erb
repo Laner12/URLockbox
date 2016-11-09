@@ -15,6 +15,21 @@
   <% end %>
 </div>
 
+<div class="jumbotron text-center">
+  <div>
+    <!-- View links by status: <button name='read' class='read btn btn-default'>Read</button> | <button name='unread' class='unread btn btn-default'>Unread</button> -->
+    <table class="text-center" style="width:100%">
+      <tr>
+        <th>View links by:</th>
+        <td><button name='read' class='read btn btn-default'>Read Status</button></td>
+        <td><button name='unread' class='unread btn btn-default'>Unread Status</button></td>
+        <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetically</button></td>
+        <td><input type="text" name="search-field" placeholder="Search"></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 <div class="linked-list">
   <% @links.each do |link| %>
       <div class="link jumbotron" data-id=<%= link.id %> data-user=<%= current_user.id %> data-read="read" data-unread="unread" data-edit="edit">

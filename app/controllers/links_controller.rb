@@ -21,7 +21,6 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
-    @link.update(link_params) if link_params[:link_tags]
     if @link.update(secondary_link_params)
       flash[:success] = "Successfully Updated!"
       redirect_to links_path
@@ -34,16 +33,12 @@ class LinksController < ApplicationController
   private
 
     def link_params
-      params.require(:link).permit(:title, :url, :user_id, :tags, :link_tags)
+      params.require(:link).permit(:title, :url, :user_id, :tags)
     end
 
     def secondary_link_params
       altered_params = link_params
-      if altered_params[:tags]
-        sanitize_tag(altered_params[:tags])
-      else
-        sanitize_tag(altered_params[:link_tags])
-      end
+      altered_params[:tags] = sanitize_tag(altered_params[:tags])
       altered_params
     end
 

@@ -28,14 +28,14 @@ RSpec.feature "User can mark a link as read" do
     fill_in "Url", with: "https://github.com/"
     click_button "Create Link"
 
-    expect(page).to have_content("Title: First Idea")
-    expect(page).to have_content("Has been read: false")
-    expect(page).to have_link("Mark as Read")
+    expect(page).to have_content("First Idea")
+    expect(page).to have_content("false")
+    expect(page).to have_button("Mark as read")
 
-    click_on "Mark as Read"
+    click_on "Mark as read"
 
-    expect(page).to have_content("Title: First Idea")
-    expect(page).to have_content("Has been read: true")
-    expect(page).not_to have_link("Mark as Read")
+    expect(page).to have_content("First Idea")
+    expect(page).to have_content("true")
+    expect(page).not_to have_button("Mark as read")
   end
 end

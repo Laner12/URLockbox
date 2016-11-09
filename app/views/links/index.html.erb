@@ -11,7 +11,7 @@
   <%= f.url_field :url %> <br>
 
   <%= f.label :tags %><br>
-  <%= f.text_field :tags %><br>
+  <%= f.text_field :tags, value: :link.is_a?(Link) ? :link.link_tags : '' %><br>
 
   <%= f.hidden_field :user_id, { value: current_user.id } %><br>
   <%= f.submit "Create Link"%>
@@ -57,10 +57,10 @@
                   <button name='mark-unread' class='mark-unread btn btn-danger'>Mark as unread</button>
               <% end %>
             </td>
-            <td>
+            <td class="link-tags">
               <% if link.tags %>
                 <% link.tags.each do |tag| %>
-                <button name='tag-button' class='btn btn-primary'><%= tag.name %></button>
+                <button class='tag-button <%= tag.name %> btn btn-primary'><%= tag.name %></button>
                 <% end %>
               <% else %>
                 No Tags

@@ -21,8 +21,8 @@
     <table class="text-center" style="width:100%">
       <tr>
         <th>View links by:</th>
-        <td><button name='read' class='read btn btn-default'>Read Status</button></td>
-        <td><button name='unread' class='unread btn btn-default'>Unread Status</button></td>
+        <td><button name='read' class='read-status-filter btn btn-default'>Status is Read</button></td>
+        <td><button name='unread' class='unread-status-filter btn btn-default'>Status is Unread</button></td>
         <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetically</button></td>
         <td><input type="text" id="search-field" placeholder="Search"></td>
       </tr>
@@ -43,7 +43,7 @@
           <tr>
             <td class="link-title"><%= link.title %></td>
             <td class="link-url"><a href=<%= link.url %>><%= link.url %></a></td>
-            <td class="link-status"><%= link.read %></td>
+            <td class="link-status-<%= link.read %>"><%= link.read %></td>
             <td>
               <% if link.read == "false" %>
                   <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>

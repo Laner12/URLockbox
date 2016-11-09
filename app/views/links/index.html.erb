@@ -3,28 +3,72 @@
   <p>
     To create a new link, fill out this form:
   </p>
-  <%= form_for(:link, url: links_path) do |f| %>
+  <%= form_for(:link, url: links_path(@link), method: :post) do |f| %>
   <%= f.label :title %> <br>
   <%= f.text_field :title %> <br>
 
   <%= f.label :url %> <br>
   <%= f.url_field :url %> <br>
 
-  <%= f.hidden_field :user_id, { value: current_user.id } %>
+  <%= f.label :tags %><br>
+  <%= f.text_field :tags, value: :link.is_a?(Link) ? :link.link_tags : '' %><br>
+
+  <%= f.hidden_field :user_id, { value: current_user.id } %><br>
   <%= f.submit "Create Link"%>
   <% end %>
 </div>
 
-<% @links.each do |link| %>
-    <div class="jumbotron text-center">
-      <h3>Title: <%= link.title %></h3> <br>
-      <h3><a href=<%= link.url %>>Link</a></h3> <br>
-      <h3>Has been read: <%= link.read %></h3> <br>
-      <% if link.read == "false" %>
-        <%= link_to "Mark as Read", "/links/#{link.id}", method: :put %>
-        <% else %>
-        <%= link_to "Mark as Unread", "/links/#{link.id}", method: :put %>
-      <% end %> <br>
-      <%= link_to "Edit", edit_link_path(link), class: "btn btn-xs btn-default" %>
-    </div>
-<% end %>
+<div class="jumbotron text-center">
+  <div>
+    <p>
+      View links by:
+    </p>
+    <table class="text-center" style="width:100%">
+      <tr>
+        <td><button name='read' class='read-status-filter btn btn-default'>Status: Read</button></td>
+        <td><button name='unread' class='unread-status-filter btn btn-default'>Status: Unread</button></td>
+        <td><input type="text" id="search-field" placeholder="Search"></td>
+        <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetical</button></td>
+        <td><button name='all-links' class='all-links btn btn-default'>Show all</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="linked-list">
+  <% @links.each do |link| %>
+      <div class="link link-status-<%= link.read %> jumbotron" data-id=<%= link.id %> data-user=<%= current_user.id %> data-read="read" data-unread="unread" data-edit="edit">
+        <table class="text-center" style="width:100%">
+          <tr>
+            <th class="text-center">Title</th>
+            <th class="text-center">Link</th>
+            <th class="text-center">Has been read?</th>
+            <th class="text-center">Options</th>
+            <th class="text-center">Tags</th>
+          </tr>
+          <tr>
+            <td class="link-title"><%= link.title %></td>
+            <td class="link-url"><a href=<%= link.url %>><%= link.url %></a></td>
+            <td><%= link.read %></td>
+            <td>
+              <% if link.read == "false" %>
+                  <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>
+                <% else %>
+                  <button name='mark-unread' class='mark-unread btn btn-danger'>Mark as unread</button>
+              <% end %>
+            </td>
+            <td class="link-tags">
+              <% if link.tags %>
+                <% link.tags.each do |tag| %>
+                <button class='tag-button <%= tag.name %> btn btn-primary'><%= tag.name %></button>
+                <% end %>
+              <% else %>
+                No Tags
+              <% end %>
+            </td>
+          </tr>
+        </table><br>
+        <%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %>
+      </div>
+  <% end %>
+</div>

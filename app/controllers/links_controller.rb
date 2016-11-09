@@ -5,8 +5,9 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(link_params)
+    @link = Link.new(secondary_link_params)
     if @link.save
+      flash[:success] = "Successfully Created New Link!"
       redirect_to links_path
     else
       flash.now[:danger] = "Invalid inputs, Please try again!"
@@ -20,18 +21,33 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
-    @link.update_attributes(link_params)
-    if @link.read == "true"
-      @link.update_attributes(read: "false")
+    if @link.update(secondary_link_params)
+      flash[:success] = "Successfully Updated!"
+      redirect_to links_path
     else
-      @link.update_attributes(read: "true")
+      flash[:danger] = "Unsuccessful Update!"
+      redirect_to edit_link_path(@link)
     end
-    redirect_to links_path
   end
 
   private
 
-  def link_params
-    params.require(:link).permit(:title, :url, :user_id)
-  end
+    def link_params
+      params.require(:link).permit(:title, :url, :user_id, :tags)
+    end
+
+    def secondary_link_params
+      altered_params = link_params
+      altered_params[:tags] = sanitize_tag(altered_params[:tags])
+      altered_params
+    end
+
+    def sanitize_tag(input)
+      sanitized = input.downcase.split(',').uniq
+      create_tag(sanitized)
+    end
+
+    def create_tag(tag_collection)
+      tag_collection.map { |word| Tag.find_or_create_by(name: word.strip) }
+    end
 end

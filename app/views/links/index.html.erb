@@ -24,7 +24,7 @@
         <td><button name='read' class='read btn btn-default'>Read Status</button></td>
         <td><button name='unread' class='unread btn btn-default'>Unread Status</button></td>
         <td><button name='alphabetical' class='alphabetical btn btn-default'>Alphabetically</button></td>
-        <td><input type="text" name="search-field" placeholder="Search"></td>
+        <td><input type="text" id="search-field" placeholder="Search"></td>
       </tr>
     </table>
   </div>
@@ -41,9 +41,9 @@
             <th class="text-center">Options</th>
           </tr>
           <tr>
-            <td><%= link.title %></td>
-            <td><a href=<%= link.url %>>Click_Here</a></td>
-            <td><%= link.read %></td>
+            <td class="link-title"><%= link.title %></td>
+            <td class="link-url"><a href=<%= link.url %>><%= link.url %></a></td>
+            <td class="link-status"><%= link.read %></td>
             <td>
               <% if link.read == "false" %>
                   <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>

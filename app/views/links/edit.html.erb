@@ -1,11 +1,14 @@
 <h1>Edit Link</h1>
 <div class="jumbotron text-center">
-  <%= form_for(:link, url: links_path(@link)) do |f| %>
+  <%= form_for(:link, url: link_path(@link), method: :put) do |f| %>
   <%= f.label :title %> <br>
   <%= f.text_field :title %> <br>
 
   <%= f.label :url %> <br>
   <%= f.url_field :url %> <br>
+
+  <%= f.label :tags %><br>
+  <%= f.text_field :tags, value: :link.is_a?(Link) ? :link.link_tags : '' %><br>
 
   <%= f.hidden_field :user_id, { value: current_user.id } %>
   <%= f.submit "Update Link"%>

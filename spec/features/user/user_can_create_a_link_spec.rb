@@ -28,7 +28,7 @@ RSpec.feature "User can create a link" do
     fill_in "Url", with: "https://github.com/"
     click_button "Create Link"
 
-    expect(page).to have_content("Title: First Idea")
-    expect(page).to have_content("Has been read: false")
+    expect(page).to have_content("First Idea")
+    expect(page).to have_content("false")
   end
 end

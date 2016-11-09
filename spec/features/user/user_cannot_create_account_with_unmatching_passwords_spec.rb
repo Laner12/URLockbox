@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User cannot create account with unmatched password" do
-  xscenario "user cannot create account with unmatched password" do
+  scenario "user cannot create account with unmatched password" do
 
     visit root_path
 
@@ -16,10 +16,10 @@ RSpec.feature "User cannot create account with unmatched password" do
 
     fill_in "Email", with: "lane@nil.com"
     fill_in "Password", with: "password"
-    fill_in "Password confirmation", with: ""
+    fill_in "Password confirmation", with: "p"
     click_button "Create Account"
 
-    expect(page).to have_content ""
+    expect(page).to have_content "Password confirmation doesn't match Password"
 
     expect(current_path).not_to eq(links_path)
   end

@@ -12,7 +12,6 @@ RSpec.feature "User can edit a link" do
 
     fill_in "Email", with: user.email
     fill_in "Password", with: "password"
-    fill_in "Password confirmation", with: "password"
     click_button "Login"
 
     expect(page).to have_content("Links")
@@ -22,9 +21,9 @@ RSpec.feature "User can edit a link" do
     fill_in "Url", with: "https://github.com/"
     click_button "Create Link"
 
-    expect(page).to have_content("Title: First Idea")
-    expect(page).to have_content("Has been read: false")
-    expect(page).to have_link("Mark as Read")
+    expect(page).to have_content("First Idea")
+    expect(page).to have_content("false")
+    expect(page).to have_button("Mark as read")
     expect(page).to have_link("Edit")
 
     click_on "Edit"
@@ -33,9 +32,9 @@ RSpec.feature "User can edit a link" do
     fill_in "Url", with: "https://github.com/"
     click_button "Update Link"
 
-    expect(page).to have_content("Title: Revised new link")
-    expect(page).to have_content("Has been read: false")
-    expect(page).to have_link("Mark as Read")
+    expect(page).to have_content("Revised new link")
+    expect(page).to have_content("false")
+    expect(page).to have_button("Mark as read")
     expect(page).to have_link("Edit")
   end
 end

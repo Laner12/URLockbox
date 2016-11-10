@@ -7,7 +7,7 @@ class Link < ApplicationRecord
 
   enum read: [ :false, :true ]
 
-  def link_tags
+  def link_tag
     tags.pluck(:name).join(', ')
   end
 end

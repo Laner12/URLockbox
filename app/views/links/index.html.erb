@@ -11,7 +11,7 @@
   <%= f.url_field :url %> <br>
 
   <%= f.label :tags %><br>
-  <%= f.text_field :tags, value: :link.is_a?(Link) ? :link.link_tags : '' %><br>
+  <%= f.text_field :tags %><br>
 
   <%= f.hidden_field :user_id, { value: current_user.id } %><br>
   <%= f.submit "Create Link"%>
@@ -54,7 +54,7 @@
               <% if link.read == "false" %>
                   <button name='mark-read' class='mark-read btn btn-primary'>Mark as read</button>
                 <% else %>
-                  <button name='mark-unread' class='mark-unread btn btn-danger'>Mark as unread</button>
+                  <button name='mark-unread' class='mark-unread btn btn-success'>Mark as unread</button>
               <% end %>
             </td>
             <td class="link-tags">
@@ -68,7 +68,10 @@
             </td>
           </tr>
         </table><br>
-        <%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %>
+          <%= link_to "Edit", edit_link_path(link), class: "btn btn-default" %>
+          <div class="text-right">
+            <%= link_to "Delete", link_path(link),method: :delete, class: "btn btn-danger" %>
+          </div>
       </div>
   <% end %>
 </div>
